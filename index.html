@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121; color: white;">
+    <div class="main">
+        <div class="card">
+            <div class="upinfo">
+                <div class="image">
+                    <img src="" alt="" class="p-img">
+                </div>
+                <h1 class="name"></h1>
+                <p class="location"></p>
+                <h3 class="usrname"></h3>
+                <h4 class="followers"></h4>
+                <h4 class="following"></h4>
+                <div class="para">
+                    <p class="bio"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const fName = document.querySelector('.name')
+    const pImage = document.querySelector('.p-img')
+    const uname = document.querySelector('.usrname')
+    const flwr = document.querySelector('.followers')
+    const flwing = document.querySelector('.following')
+    const lction = document.querySelector('.location')
+    const bio = document.querySelector('.bio')
+    const reqUrl = 'https://api.github.com/users/hiteshChoudhary' //define a url or give  src of api
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', reqUrl)//call method
+    xhr.onreadystatechange = function(){
+        // console.log(xhr.readyState)
+        if (xhr.readyState === 4) {
+            const data = JSON.parse(this.responseText)
+            // console.log(data.login)
+            fName.innerHTML = `${data.name}`
+            pImage.src = data.avatar_url
+            lction.innerHTML = `${data.location}`
+            uname.innerHTML = `Username : ${data.login}`
+            flwr.innerHTML = `Followers : ${data.followers}`
+            flwing.innerHTML = `Following : ${data.following}`
+            bio.innerHTML = `${data.bio}`
+        }
+    }
+    xhr.onreadystatechange()
+    xhr.send()
+
+</script>
+</html>
